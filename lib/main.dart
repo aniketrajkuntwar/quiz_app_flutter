@@ -5,6 +5,8 @@ void main() {
 }
 
 class QuizApp extends StatelessWidget {
+  const QuizApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,16 +16,50 @@ class QuizApp extends StatelessWidget {
   }
 }
 
-class FirstScreen extends StatelessWidget {
+class FirstScreen extends StatefulWidget {
+  const FirstScreen({super.key});
+
+  @override
+  _FirstScreenState createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _fadeInAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
+
+    _fadeInAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeIn,
+    );
+
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF6A4FF3), Color(0xFF9575FE)],
+              colors: [Color(0xFF6A4FF3), Color(0xFF8C65F9)],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -31,61 +67,63 @@ class FirstScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Illustration
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 40.0),
-                child: Image.asset(
-                  'assets/images/quiz_illustration.png', // Add your illustration here
-                  height: 300,
+              FadeTransition(
+                opacity: _fadeInAnimation,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 40.0),
+                  child: Image.asset(
+                    'assets/images/quiz_illustration.png',
+                    height: 300,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-
-              // Text content
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  children: [
-                    Text(
-                      "Create, share and play quizzes whenever and wherever you want",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
+              FadeTransition(
+                opacity: _fadeInAnimation,
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Create, share and play quizzes whenever and wherever you want",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          height: 1.5,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
+                      SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
                             radius: 4,
-                            backgroundColor:
-                                Colors.white), // Pagination Indicator
-                      ],
-                    ),
-                  ],
+                            backgroundColor: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-
-              // Buttons
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
                   children: [
                     ElevatedButton(
-                      onPressed: () {
-                        // Navigate to sign-up or next screen
-                      },
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        padding: EdgeInsets.symmetric(vertical: 15.0),
+                        padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        elevation: 5,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "GET STARTED",
                           style: TextStyle(
@@ -96,12 +134,10 @@ class FirstScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 15),
                     TextButton(
-                      onPressed: () {
-                        // Navigate to login screen
-                      },
-                      child: Text(
+                      onPressed: () {},
+                      child: const Text(
                         "I ALREADY HAVE AN ACCOUNT",
                         style: TextStyle(
                           color: Colors.white,
@@ -110,7 +146,7 @@ class FirstScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
