@@ -114,7 +114,7 @@ class _FirstScreenState extends State<FirstScreen>
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => CreateAccountPage(),
+                            builder: (context) => AccountTypePage(),
                           ),
                         );
                       },
@@ -155,6 +155,151 @@ class _FirstScreenState extends State<FirstScreen>
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AccountTypePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF6A4FF3), Color(0xFF8C65F9)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "What type of account do\nyou like to create? 🤔",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 30),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
+                  padding: const EdgeInsets.all(20),
+                  children: [
+                    _buildAccountTypeCard(
+                      title: "Personal",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateAccountPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildAccountTypeCard(
+                      title: "School",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateAccountPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildAccountTypeCard(
+                      title: "Teacher",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateAccountPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildAccountTypeCard(
+                      title: "Student",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateAccountPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildAccountTypeCard(
+                      title: "Professional",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateAccountPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildAccountTypeCard(
+                      title: "Business",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateAccountPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAccountTypeCard({
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.account_circle,
+              size: 48,
+              color: Colors.grey[600],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );
