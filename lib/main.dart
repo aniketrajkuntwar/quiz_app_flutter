@@ -323,6 +323,53 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  void _handleForgotPassword() {
+    // Show a dialog or navigate to a new page to handle the forgot password flow
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Forgot Password'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                  'Enter your email address to receive a password reset link.'),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Handle the password reset request
+                _sendPasswordResetEmail();
+                Navigator.of(context).pop();
+              },
+              child: Text('Send Reset Link'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _sendPasswordResetEmail() {
+    // Implement the logic to send the password reset email
+    print('Sending password reset email to: ${_emailController.text}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -408,6 +455,18 @@ class _LoginPageState extends State<LoginPage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextButton(
+                    onPressed: _handleForgotPassword,
+                    child: const Text(
+                      "Forgot Password?",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
                       ),
                     ),
                   ),
