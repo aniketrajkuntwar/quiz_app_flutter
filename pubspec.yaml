@@ -1,10 +1,10 @@
 name: quiz_app
 description: "A new Flutter project."
 
-# Prevent the package from being accidentally published to pub.dev.
+
 publish_to: 'none'
 
-# Version and build number
+
 version: 1.0.0+1
 
 environment:
@@ -21,13 +21,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # Recommended lints for good coding practices
+  
   flutter_lints: ^5.0.0
 
 flutter:
-  # Include Material Icons font
+  
   uses-material-design: true
 
-  # Add assets
+  
   assets:
      - assets/images/quiz_illustration.png.jpeg
